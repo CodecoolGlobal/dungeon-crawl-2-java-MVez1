@@ -42,6 +42,7 @@ public class Main extends Application {
         borderPane.setRight(ui);
 
         Scene scene = new Scene(borderPane);
+        scene.getRoot().setStyle("-fx-font-family: 'sans-serif'");
         primaryStage.setScene(scene);
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
