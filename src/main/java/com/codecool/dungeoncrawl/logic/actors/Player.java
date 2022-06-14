@@ -1,12 +1,13 @@
 package com.codecool.dungeoncrawl.logic.actors;
 
 import com.codecool.dungeoncrawl.logic.Cell;
+import com.codecool.dungeoncrawl.logic.items.Item;
 
 import java.util.List;
 
 public class Player extends Actor {
 
-    private List<Item> Inventory = new List<Item>();
+    private List<Item> Inventory;
 
     public Player(Cell cell) {
         super(cell);
@@ -19,10 +20,12 @@ public class Player extends Actor {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
-        for (int i = 0; i < Inventory.size()-1; i++) {
-            sb.append(Inventory.get(i).getTileName() + ", ");
+        if (Inventory != null) {
+            for (int i = 0; i < Inventory.size() - 1; i++) {
+                sb.append(Inventory.get(i).getTileName() + ", ");
+            }
+            sb.append(Inventory.get(Inventory.size() - 1).getTileName());
         }
-        sb.append(Inventory.get(Inventory.size()-1).getTileName());
         sb.append("]");
         return sb.toString();
 
