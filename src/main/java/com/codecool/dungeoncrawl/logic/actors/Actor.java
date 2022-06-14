@@ -19,6 +19,11 @@ public abstract class Actor implements Drawable {
         cell = nextCell;
     }
 
+    public boolean validMove(int dx, int dy) {
+        Cell nextCell = cell.getNeighbor(dx, dy);
+        return false;
+    }
+
     public int getHealth() {
         return health;
     }
