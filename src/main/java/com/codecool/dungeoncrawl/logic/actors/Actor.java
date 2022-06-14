@@ -13,11 +13,14 @@ public abstract class Actor implements Drawable {
     }
 
     public void move(int dx, int dy) {
+        Cell nextCell = cell.getNeighbor(dx, dy);
+        Actor Monster = nextCell.getActor();
         if (validMove(dx, dy)) {
-            Cell nextCell = cell.getNeighbor(dx, dy);
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
+        } else if (cell.getActor() instanceof Player && Monster instanceof Skeleton) {
+            ((Player) cell.getActor()).attackMonster(Monster);
         }
     }
 
@@ -29,12 +32,21 @@ public abstract class Actor implements Drawable {
         return false;
     }
 
+
     public int getHealth() {
         return health;
     }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     public Cell getCell() {
         return cell;
+    }
+
+    public void setCell(Cell cell) {
+        this.cell = cell;
     }
 
     public int getX() {
@@ -44,4 +56,6 @@ public abstract class Actor implements Drawable {
     public int getY() {
         return cell.getY();
     }
+
+
 }
