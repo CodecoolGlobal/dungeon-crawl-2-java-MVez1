@@ -20,9 +20,9 @@ public class Player extends Actor {
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
         for (int i = 0; i < Inventory.size()-1; i++) {
-            sb.append(Inventory.get(i).getName() + ", ");
+            sb.append(Inventory.get(i).getTileName() + ", ");
         }
-        sb.append(Inventory.get(Inventory.size()-1).getName());
+        sb.append(Inventory.get(Inventory.size()-1).getTileName());
         sb.append("]");
         return sb.toString();
 
