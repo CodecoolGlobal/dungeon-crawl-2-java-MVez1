@@ -3,11 +3,12 @@ package com.codecool.dungeoncrawl.logic.actors;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.items.Item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player extends Actor {
 
-    private List<Item> Inventory;
+    private List<Item> Inventory = new ArrayList<>();
 
     public Player(Cell cell) {
         super(cell);
@@ -15,6 +16,10 @@ public class Player extends Actor {
 
     public String getTileName() {
         return "player";
+    }
+
+    public void addToInventory(Item item) {
+        Inventory.add(item);
     }
 
     @Override

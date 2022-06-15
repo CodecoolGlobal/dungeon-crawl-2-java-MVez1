@@ -4,10 +4,13 @@ import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -22,7 +25,6 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
-
     Label inventoryLabel = new Label();
 
     public static void main(String[] args) {
@@ -39,6 +41,24 @@ public class Main extends Application {
         ui.add(healthLabel, 1, 0);
         ui.add(new Label("Inventory: "), 0, 2);
         ui.add(inventoryLabel, 1, 2);
+
+        Button button = new Button();
+        button.setText("Pick up");
+        button.setFocusTraversable(false);
+        ui.add(button, 0, 3);
+
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                int x = map.getPlayer().getX();
+                int y = map.getPlayer().getY();
+                Cell cell = map.getCell(x, y);
+                if (cell.getItem() != null) {
+                    map.getPlayer().addToInventory(cell.getItem());
+                    cell.setItem(null);
+                }
+            }
+        });
 
         BorderPane borderPane = new BorderPane();
 
