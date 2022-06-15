@@ -1,7 +1,9 @@
 package com.codecool.dungeoncrawl.logic.actors;
 
 import com.codecool.dungeoncrawl.logic.Cell;
+import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.items.Item;
+import com.codecool.dungeoncrawl.logic.items.Key;
 import com.codecool.dungeoncrawl.logic.items.Sword;
 
 import java.util.ArrayList;
@@ -38,11 +40,42 @@ public class Player extends Actor {
 
     }
 
+    @Override
+    public void move(int dx, int dy) {
+        checkNeighbor(dx, dy);
+        Cell nextCell = getCell().getNeighbor(dx, dy);
+        if (validMove(dx, dy)) {
+            getCell().setActor(null);
+            nextCell.setActor(this);
+            setCell(nextCell);
+        }
+    }
+
+    private void checkNeighbor(int dx, int dy) {
+        if (getCell().getNeighbor(dx, dy).getActor() instanceof Skeleton) {
+            Actor monster = getCell().getNeighbor(dx, dy).getActor();
+            ((Player) getCell().getActor()).attackMonster(monster);
+        }
+        if (getCell().getNeighbor(dx, dy).getType().isBarrier()) {
+            if (getCell().getNeighbor(dx, dy).getType().equals(CellType.CLOSED_DOOR)) {
+                Cell lock = getCell().getNeighbor(dx, dy);
+                unlock(lock);
+            }
+        }
+    }
+
+    private void unlock(Cell lockedDoor) {
+        for (Item item : Inventory) {
+            if (item instanceof Key) {
+                lockedDoor.setType(CellType.OPEN_DOOR);
+            }
+        }
+    }
 
     public void attackMonster(Actor Monster) {
-        Monster.setHealth(Monster.getHealth()-getMaxFatality());
+        Monster.setHealth(Monster.getHealth() - getMaxFatality());
         if (Monster.getHealth() > 0) {
-            this.setHealth(this.getHealth()-Monster.getFatality());
+            this.setHealth(this.getHealth() - Monster.getFatality());
         } else {
             this.getCell().setActor(null);
             Monster.getCell().setActor(this);
@@ -60,6 +93,14 @@ public class Player extends Actor {
             }
         }
         return maxFatality;
+    }
+
+    public boolean validMove(int dx, int dy) {
+        Cell nextCell = getCell().getNeighbor(dx, dy);
+        if (!nextCell.getType().isBarrier() && nextCell.getActor() == null) {
+            return true;
+        }
+        return false;
     }
 
 }
