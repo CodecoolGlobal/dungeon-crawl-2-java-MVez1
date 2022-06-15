@@ -4,11 +4,12 @@ import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.items.Item;
 import com.codecool.dungeoncrawl.logic.items.Sword;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player extends Actor {
 
-    private List<Item> Inventory;
+    private List<Item> Inventory = new ArrayList<>();
 
     public Player(Cell cell) {
         super(cell);
@@ -22,7 +23,7 @@ public class Player extends Actor {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
-        if (Inventory != null) {
+        if (Inventory.size() > 0) {
             for (int i = 0; i < Inventory.size() - 1; i++) {
                 sb.append(Inventory.get(i).getTileName() + ", ");
             }
@@ -35,7 +36,7 @@ public class Player extends Actor {
 
 
     public void attackMonster(Actor Monster) {
-        boolean hasSword = false;
+       /** boolean hasSword = false;
         if (Inventory != null) {
           for (Item item : Inventory) {
               if (item instanceof Sword) {
@@ -45,9 +46,10 @@ public class Player extends Actor {
           }
         }
         if (hasSword) {Monster.setHealth(Monster.getHealth()-10);}
-        else {Monster.setHealth(Monster.getHealth()-5);}
+        else {Monster.setHealth(Monster.getHealth()-5);}*/
+        Monster.setHealth(Monster.getHealth()-getMaxFatality());
         if (Monster.getHealth() > 0) {
-            this.setHealth(this.getHealth()-2);
+            this.setHealth(this.getHealth()-Monster.getFatality());
         } else {
             this.getCell().setActor(null);
             Monster.getCell().setActor(this);
