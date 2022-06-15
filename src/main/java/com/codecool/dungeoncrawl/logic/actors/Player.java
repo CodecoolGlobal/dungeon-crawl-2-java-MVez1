@@ -42,26 +42,30 @@ public class Player extends Actor {
 
     @Override
     public void move(int dx, int dy) {
-        checkNeighbor(dx, dy);
-        Cell nextCell = getCell().getNeighbor(dx, dy);
-        if (validMove(dx, dy)) {
-            getCell().setActor(null);
-            nextCell.setActor(this);
-            setCell(nextCell);
+        if (!checkNeighbor(dx, dy)) {
+            Cell nextCell = getCell().getNeighbor(dx, dy);
+            if (validMove(dx, dy)) {
+                getCell().setActor(null);
+                nextCell.setActor(this);
+                setCell(nextCell);
+            }
         }
     }
 
-    private void checkNeighbor(int dx, int dy) {
+    private boolean checkNeighbor(int dx, int dy) {
         if (getCell().getNeighbor(dx, dy).getActor() instanceof Skeleton) {
             Actor monster = getCell().getNeighbor(dx, dy).getActor();
             ((Player) getCell().getActor()).attackMonster(monster);
+            return true;
         }
         if (getCell().getNeighbor(dx, dy).getType().isBarrier()) {
             if (getCell().getNeighbor(dx, dy).getType().equals(CellType.CLOSED_DOOR)) {
                 Cell lock = getCell().getNeighbor(dx, dy);
                 unlock(lock);
             }
+            return true;
         }
+        return false;
     }
 
     private void unlock(Cell lockedDoor) {
