@@ -12,6 +12,7 @@ public class Player extends Actor {
 
     public Player(Cell cell) {
         super(cell);
+        this.setFatality(5);
     }
 
     public String getTileName() {
@@ -52,6 +53,18 @@ public class Player extends Actor {
             Monster.getCell().setActor(this);
             this.setCell(Monster.getCell());
         }
+    }
+
+    public int getMaxFatality() {
+        int maxFatality = this.getFatality();
+        if (Inventory != null) {
+            for (Item item : Inventory) {
+                if (item.getFatality() > maxFatality) {
+                    maxFatality = item.getFatality();
+                }
+            }
+        }
+        return maxFatality;
     }
 
 }

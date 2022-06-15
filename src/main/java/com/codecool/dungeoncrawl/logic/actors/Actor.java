@@ -7,6 +7,8 @@ public abstract class Actor implements Drawable {
     private Cell cell;
     private int health = 10;
 
+    private int fatality;
+
     public Actor(Cell cell) {
         this.cell = cell;
         this.cell.setActor(this);
@@ -57,5 +59,11 @@ public abstract class Actor implements Drawable {
         return cell.getY();
     }
 
+    public int getFatality() {
+        return fatality;
+    }
 
+    public void setFatality(int fatality) {
+        this.fatality = fatality;
+    }
 }
