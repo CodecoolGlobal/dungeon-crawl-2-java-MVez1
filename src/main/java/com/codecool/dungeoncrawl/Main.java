@@ -56,6 +56,7 @@ public class Main extends Application {
                 if (cell.getItem() != null) {
                     map.getPlayer().addToInventory(cell.getItem());
                     cell.setItem(null);
+                    refresh();
                 }
             }
         });
