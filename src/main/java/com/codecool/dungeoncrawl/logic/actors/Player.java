@@ -61,19 +61,21 @@ public class Player extends Actor {
         if (getCell().getNeighbor(dx, dy).getType().isBarrier()) {
             if (getCell().getNeighbor(dx, dy).getType().equals(CellType.CLOSED_DOOR)) {
                 Cell lock = getCell().getNeighbor(dx, dy);
-                unlock(lock);
+                return !unlock(lock);
             }
             return true;
         }
         return false;
     }
 
-    private void unlock(Cell lockedDoor) {
+    private boolean unlock(Cell lockedDoor) {
         for (Item item : Inventory) {
             if (item instanceof Key) {
                 lockedDoor.setType(CellType.OPEN_DOOR);
+                return true;
             }
         }
+        return false;
     }
 
     public void attackMonster(Actor Monster) {
