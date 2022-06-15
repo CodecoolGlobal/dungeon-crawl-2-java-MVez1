@@ -36,17 +36,6 @@ public class Player extends Actor {
 
 
     public void attackMonster(Actor Monster) {
-       /** boolean hasSword = false;
-        if (Inventory != null) {
-          for (Item item : Inventory) {
-              if (item instanceof Sword) {
-                  hasSword = true;
-                  break;
-              }
-          }
-        }
-        if (hasSword) {Monster.setHealth(Monster.getHealth()-10);}
-        else {Monster.setHealth(Monster.getHealth()-5);}*/
         Monster.setHealth(Monster.getHealth()-getMaxFatality());
         if (Monster.getHealth() > 0) {
             this.setHealth(this.getHealth()-Monster.getFatality());
