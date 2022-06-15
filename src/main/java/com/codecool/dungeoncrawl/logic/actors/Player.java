@@ -25,7 +25,7 @@ public class Player extends Actor {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
-        if (Inventory != null) {
+        if (Inventory.size() > 0) {
             for (int i = 0; i < Inventory.size() - 1; i++) {
                 sb.append(Inventory.get(i).getTileName() + ", ");
             }
