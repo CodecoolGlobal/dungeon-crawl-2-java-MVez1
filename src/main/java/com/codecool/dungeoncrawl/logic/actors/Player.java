@@ -11,6 +11,8 @@ public class Player extends Actor {
 
     private List<Item> Inventory = new ArrayList<>();
 
+    private List<Actor> Monsters = new ArrayList<>();
+
     public Player(Cell cell) {
         super(cell);
         this.setFatality(5);
@@ -39,6 +41,7 @@ public class Player extends Actor {
     }
 
 
+
     public void attackMonster(Actor Monster) {
         Monster.setHealth(Monster.getHealth()-getMaxFatality());
         if (Monster.getHealth() > 0) {
@@ -60,6 +63,10 @@ public class Player extends Actor {
             }
         }
         return maxFatality;
+    }
+
+    public void move() {
+
     }
 
 }

@@ -2,20 +2,20 @@ package com.codecool.dungeoncrawl.logic.actors;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 
-public class Skeleton extends Actor {
-    public Skeleton(Cell cell) {
+public class randomMonster extends Actor {
+
+
+    public randomMonster(Cell cell) {
         super(cell);
         this.setFatality(2);
     }
 
-    @Override
     public String getTileName() {
-        return "skeleton";
+        return "randomMonster";
     }
 
     public void move() {
 
     }
-
 
 }
