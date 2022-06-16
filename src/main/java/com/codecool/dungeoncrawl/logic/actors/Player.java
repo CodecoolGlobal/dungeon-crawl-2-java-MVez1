@@ -69,4 +69,8 @@ public class Player extends Actor {
 
     }
 
+    public List<Actor> getMonsters() {
+        return Monsters;
+    }
+
 }

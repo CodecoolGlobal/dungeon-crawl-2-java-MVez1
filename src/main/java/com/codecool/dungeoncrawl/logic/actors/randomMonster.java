@@ -2,6 +2,8 @@ package com.codecool.dungeoncrawl.logic.actors;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 
+import java.util.Random;
+
 public class randomMonster extends Actor {
 
 
@@ -17,5 +19,4 @@ public class randomMonster extends Actor {
     public void move() {
 
     }
-
 }
