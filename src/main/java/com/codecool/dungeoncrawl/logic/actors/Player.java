@@ -13,7 +13,6 @@ public class Player extends Actor {
 
     private List<Item> Inventory = new ArrayList<>();
 
-    private List<Actor> Monsters = new ArrayList<>();
 
     public Player(Cell cell) {
         super(cell);
@@ -55,8 +54,8 @@ public class Player extends Actor {
     }
 
     private boolean checkNeighbor(int dx, int dy) {
-        if (getCell().getNeighbor(dx, dy).getActor() instanceof Skeleton) {
-            Actor monster = getCell().getNeighbor(dx, dy).getActor();
+        Actor monster = getCell().getNeighbor(dx, dy).getActor();
+        if (monster instanceof Skeleton || monster instanceof RandomMonster || monster instanceof AggressiveMonster) {
             ((Player) getCell().getActor()).attackMonster(monster);
             return true;
         }
@@ -108,9 +107,5 @@ public class Player extends Actor {
 
     }
 
-    public List<Actor> getMonsters() {
-        return Monsters;
-
-    }
 
 }

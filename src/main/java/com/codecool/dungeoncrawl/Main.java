@@ -80,18 +80,26 @@ public class Main extends Application {
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(0, -1);
+                map.getAggressiveMonster().move();
+                map.getRandomMonster().move();
                 refresh();
                 break;
             case DOWN:
                 map.getPlayer().move(0, 1);
+                map.getAggressiveMonster().move();
+                map.getRandomMonster().move();
                 refresh();
                 break;
             case LEFT:
                 map.getPlayer().move(-1, 0);
+                map.getAggressiveMonster().move();
+                map.getRandomMonster().move();
                 refresh();
                 break;
             case RIGHT:
                 map.getPlayer().move(1,0);
+                map.getAggressiveMonster().move();
+                map.getRandomMonster().move();
                 refresh();
                 break;
         }

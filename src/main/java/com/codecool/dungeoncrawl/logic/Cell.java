@@ -58,4 +58,8 @@ public class Cell implements Drawable {
         return y;
     }
 
+    public GameMap getGameMap() {
+        return gameMap;
+    }
+
 }
