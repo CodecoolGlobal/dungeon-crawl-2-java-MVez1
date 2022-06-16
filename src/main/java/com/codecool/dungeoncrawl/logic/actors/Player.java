@@ -13,6 +13,7 @@ public class Player extends Actor {
 
     private List<Item> Inventory = new ArrayList<>();
 
+
     public Player(Cell cell) {
         super(cell);
         this.setFatality(5);
@@ -53,8 +54,8 @@ public class Player extends Actor {
     }
 
     private boolean checkNeighbor(int dx, int dy) {
-        if (getCell().getNeighbor(dx, dy).getActor() instanceof Skeleton) {
-            Actor monster = getCell().getNeighbor(dx, dy).getActor();
+        Actor monster = getCell().getNeighbor(dx, dy).getActor();
+        if (monster instanceof Skeleton || monster instanceof RandomMonster || monster instanceof AggressiveMonster) {
             ((Player) getCell().getActor()).attackMonster(monster);
             return true;
         }
@@ -77,6 +78,7 @@ public class Player extends Actor {
         }
         return false;
     }
+
 
     public void attackMonster(Actor Monster) {
         Monster.setHealth(Monster.getHealth() - getMaxFatality());
@@ -101,12 +103,9 @@ public class Player extends Actor {
         return maxFatality;
     }
 
-    public boolean validMove(int dx, int dy) {
-        Cell nextCell = getCell().getNeighbor(dx, dy);
-        if (!nextCell.getType().isBarrier() && nextCell.getActor() == null) {
-            return true;
-        }
-        return false;
+    public void move() {
+
     }
+
 
 }
