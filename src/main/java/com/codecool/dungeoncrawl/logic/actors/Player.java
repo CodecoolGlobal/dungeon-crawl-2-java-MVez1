@@ -19,11 +19,6 @@ public class Player extends Actor {
         this.setFatality(5);
     }
 
-    public Player(Cell cell, String name) {
-        super(cell);
-        this.name = name;
-        this.setFatality(5);
-    }
 
     public String getTileName() {
         return "player";
@@ -109,33 +104,14 @@ public class Player extends Actor {
         return maxFatality;
     }
 
+
+    public List<Item> getInventory() {
+        return Inventory;
+    }
+
     public void move() {
 
     }
 
 
-
-public class Player extends Actor {
-    private String name;
-
-    public Player(Cell cell) {
-        super(cell);
-    }
-
-    public Player(Cell cell, String name) {
-        super(cell);
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getTileName() {
-        return "player";
-    }
 }
